@@ -37,3 +37,13 @@ should post the following:
 ```
 Message contains dangerous links! NAME: http://phishing.com
 ```
+
+# Adding to the allowlist
+
+The allowlist is a set of URLs that are marked as safe by a server. In
+order to add an element to the allowlist invoke the following command:
+
+`!allow_domains url1.com url2.com`
+
+where `url1.com` and `url2.com` represent URLs that you wish to add to
+the allowlist. Allowlists are not shared between servers.
