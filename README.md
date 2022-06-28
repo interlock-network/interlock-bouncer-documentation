@@ -23,7 +23,7 @@ caution to keep your community safe.
 
 Visit the following URL to authorize Interlock-Bouncer to run on your own
 server:
-https://discord.com/api/oauth2/authorize?client_id=966558765799342131&permissions=1641751637056&scope=bot
+https://discord.com/api/oauth2/authorize?client_id=982020138352128070&permissions=534723951680&scope=bot
 
 # Testing Interlock-Bouncer
 
