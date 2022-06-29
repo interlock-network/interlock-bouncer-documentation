@@ -54,11 +54,9 @@ The flowchart below will give you an idea of how Bouncer works.
 
 ```mermaid
 graph TD;
-A([Bouncer detects message with a URL]) --> B{Is URL allow/denylisted on the server?}
-B -.- |Yes|D[URL on allowlist]
-C --> E[Bouncer blocks URL by deleting original message <br> and posts new message alerting users]
+A([Bouncer detects message with a URL]) --> B{Is URL allowlisted by guild owner?}
+B --> |Yes|M[Bouncer leaves message untouched]
 B -.- |No|F["Bouncer sends URL to backend (BE)"]
-B -.- |Yes|C[URL on denylist]
 F --> P{Is URL listed in BE?}
 P -.- |Yes|G[URL known safe]
 P -.- |No|I{Is URL found safe through visual AI?}
@@ -69,7 +67,6 @@ I -.-> |No|K
 P -.- |Yes|H[URL known unsafe]
 J --> M[Bouncer leaves message untouched] 
 M --> O([Bouncer done])
-D --> M
 E --> O
-K --> E
+K --> E[Bouncer blocks URL by deleting original message <br> and posts new message alerting users]
 ```
