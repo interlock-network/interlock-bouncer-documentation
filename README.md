@@ -54,21 +54,18 @@ The flowchart below will give you an idea of how Bouncer works.
 
 ```mermaid
 graph TD;
-A([Bouncer detects message with a URL]) --> B{Is URL allow/denylisted?}
-B -.- |Yes|D[URL on allowlist]
-D ---> O
-C --> E[Bouncer blocks URL]
-B -.- |No|F["Bouncer sends URL to backend (BE)"]
-B -.- |Yes|C[URL on denylist]
-F --> P{Is URL known to us?}
-P -.- |Yes|G[URL known safe]
-P -.- |No|I{Is URL found safe?}
-G --> J[BE sends safe]
-H --> K[BE sends unsafe]
-I -.-> |Yes|J[BE sends safe]
-I -.-> |No|K
-P -.- |Yes|H[URL known unsafe]
-J --> O([Bouncer done])
-E --> O
-K --> E
+START([Bouncer detects message with a URL]) --> A
+A{Is URL allowlisted?} -.-> |Yes|DONE
+A -.-> |No|B
+B["Bouncer sends URL to server"] --> F
+F{Is URL known safe?} -.-> |Yes|SAFE
+F -.-> |No|D
+D -.-> |No|E
+E[Server scans URL] --> FOUND
+D{Is URL known unsafe?} -.-> |Yes|UNSAFE
+FOUND{Is URL found safe?} -.-> |Yes|SAFE
+FOUND -.-> |No|UNSAFE
+SAFE[Server sends safe] --> DONE([Bouncer done])
+UNSAFE[Server sends unsafe] ---> BLOCKED
+BLOCKED[Bouncer blocks URL] --> DONE
 ```
